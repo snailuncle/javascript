@@ -1,0 +1,95 @@
+{ // VScode主题配置
+    "editor.lineHeight": 24,
+    "editor.renderLineHighlight": "none",
+    "editor.renderWhitespace": "none",
+    "editor.cursorBlinking": "smooth",
+    "editor.multiCursorModifier": "ctrlCmd",
+    // 是否允许自定义的snippet片段提示
+    "editor.snippetSuggestions": "top",
+    "editor.formatOnPaste": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "html.suggest.angular1": false,
+    "html.suggest.ionic": false,
+    "files.trimTrailingWhitespace": true,
+    // VScode 文件搜索区域配置
+    "search.exclude": {
+        "**/dist": true,
+        "**/build": true,
+        "**/elehukouben": true,
+        "**/.git": true,
+        "**/.gitignore": true,
+        "**/.svn": true,
+        "**/.DS_Store": true,
+        "**/.idea": true,
+        "**/.vscode": false,
+        "**/yarn.lock": true,
+        "**/tmp": true
+    },
+    // 排除文件搜索区域，比如node_modules
+    "files.exclude": {
+        "**/.idea": true,
+        "**/yarn.lock": true,
+        "**/tmp": true
+    },
+    // 配置文件关联
+    "files.associations": {
+        "*.vue": "vue",
+        "*.wxss": "css"
+    },
+    // 配置emmet是否启用tab展开缩写
+    "emmet.triggerExpansionOnTab": true,
+    // 配置emmet对文件类型的支持
+    "emmet.syntaxProfiles": {
+        "vue-html": "html",
+        "vue": "html",
+        "javascript": "javascriptreact",
+        "xml": {
+            "attr_quotes": "single"
+        }
+    },
+    // 在react的jsx中添加对emmet的支持
+    "emmet.includeLanguages": {
+        "jsx-sublime-babel-tags": "javascriptreact"
+    },
+    // 是否开启eslint检测
+    "eslint.enable": false,
+    // 文件保存时，是否自动根据eslint进行格式化
+    "eslint.autoFixOnSave": false,
+    // eslint配置文件
+    "eslint.options": {
+        "plugins": [
+            "html",
+            "javascript",
+            {
+                "language": "vue",
+                "autoFix": true
+            },
+            "vue"
+        ]
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "html"
+    ],
+// 控制字体系列。
+"editor.fontFamily": "Consolas, 'Courier New', monospace,'宋体'",
+// 以像素为单位控制字号。
+"editor.fontSize": 14,
+// 控制选取范围是否有圆角
+"editor.roundedSelection": false,
+// 建议小组件的字号
+"editor.suggestFontSize": 16,
+// 在“打开的编辑器”窗格中显示的编辑器数量。将其设置为 0 可隐藏窗格。
+"explorer.openEditors.visible": 0,
+// 是否已启用自动刷新
+"git.autorefresh": false,
+// 是否启用了自动提取。
+"git.autofetch": false,
+// 以像素为单位控制终端的字号，这是 editor.fontSize 的默认值。
+"terminal.integrated.fontSize": 14,
+// 控制终端游标是否闪烁。
+"terminal.integrated.cursorBlinking": true,
+// 一个制表符等于的空格数。该设置在 `editor.detectIndentation` 启用时根据文件内容进行重写。
+"editor.tabSize": 4,
+}
