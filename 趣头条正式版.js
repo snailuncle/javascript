@@ -1,6 +1,9 @@
 // 趣头条
 "auto";
 console.show();
+//设置控制台大小为屏幕的四分之一
+console.setSize(device.width / 2, device.height / 3);
+console.setPosition(10, 10)
 let round = Math.round;
 let click_count = 0;
 //请求截图
@@ -49,7 +52,7 @@ String.prototype.format = function () {
 
 
 function open_qutoutiao(app_name, time_length) {
-    let t = time_length || 1000;
+    let t = time_length || 3000;
     app.launchApp(app_name);
     sleep(t);
 }
@@ -85,10 +88,10 @@ function view_popup() {
 function look_news_or_video() {
     if (currentActivity() == "com.jifen.qukan.view.activity.NewsDetailActivity") {
         lookat_news();
-        click_count=0;
+        click_count = 0;
     } else if (currentActivity() == "com.jifen.qukan.view.activity.VideoNewsDetailActivity") {
         watch_video();
-        click_count=0;
+        click_count = 0;
     } else {
         console.log('没有发现新闻或者视频,本次点击页面异常,请检查点击指令,来自look_news_or_video');
         // exit();
@@ -102,17 +105,25 @@ function lookat_news() {
     while (true) {
         console.log('开始看新闻');
         // desc = 展开查看全文 ▾
-        if (desc('展开查看全文 ▾').exists() && desc('展开查看全文 ▾').boundsInside(0, 0, WIDTH, round(HEIGHT / 3))) {
+        // text = 展开查看全文 ▾
+
+        if (desc('展开查看全文 ▾').exists() && desc('展开查看全文 ▾').boundsInside(0, 0, WIDTH, round(HEIGHT / 3)) || text('展开查看全文 ▾').exists() && text('展开查看全文 ▾').boundsInside(0, 0, WIDTH, round(HEIGHT / 3))) {
             console.log('发现**展开查看全文**');
             sleep(2000);
-            let click_is_ok = desc('展开查看全文 ▾').findOnce().click();
-            if (click_is_ok) {
-                console.log('已点击**展开查看全文')
+            if (descContains('展开查看全文').findOnce() || textContains('展开查看全文').findOnce()) {
+
+
+                let click_is_ok = descContains('展开查看全文').findOnce().click() || textContains('展开查看全文').findOnce().click();
+                if (click_is_ok) {
+                    console.log('已点击**展开查看全文')
+                } else {
+                    console.log('点击展开查看全文失败,停止脚本');
+                    exit();
+                }
+                sleep(1000);
             } else {
-                console.log('点击展开查看全文失败,停止脚本');
-                exit();
+                console.log('虽然发现了**展开查看全文, 但又找不到了')
             }
-            sleep(1000);
         }
 
         rnd_swipe();
@@ -275,9 +286,10 @@ function refresh() {
 function advertisement() {
     let y1, y2
     y1 = round(WIDTH / 3);
-    y2 = round(WIDTH / 3) * 2;
+    y2 = round(WIDTH / 4) * 3;
 
-    while (text('推广').exists() && text('推广').boundsInside(0, y1, WIDTH, y2)) {
+    while (text('推广').exists() && text('推广').boundsInside(0, y1, WIDTH, y2).findOnce() || text('广告').exists() && text('广告').boundsInside(0, y1, WIDTH, y2).findOnce() || text('　点击下载 >　').exists() && text('　点击下载 >　').boundsInside(0, y1, WIDTH, y2).findOnce()) {
+
         console.log('广告');
         rnd_swipe();
 
