@@ -26,7 +26,7 @@ let APP_NAME = "趣头条";
 let PACKAGE_NAME = "com.jifen.qukan";
 let WIDTH = device.width;
 let HEIGHT = device.height;
-let CNT = 20;
+let CNT = 30;
 let VIDEO_LENGTH = 180000;
 
 
@@ -102,8 +102,9 @@ function look_news_or_video() {
 function lookat_news() {
     let n = 0;
     rnd_swipe();
+    console.log('开始看新闻');
     while (true) {
-        console.log('开始看新闻');
+        console.log('观看新闻...');
         // desc = 展开查看全文 ▾
         // text = 展开查看全文 ▾
 
@@ -111,9 +112,9 @@ function lookat_news() {
             console.log('发现**展开查看全文**');
             sleep(2000);
             if (descContains('展开查看全文').findOnce() || textContains('展开查看全文').findOnce()) {
-
-
-                let click_is_ok = descContains('展开查看全文').findOnce().click() || textContains('展开查看全文').findOnce().click();
+                let click_is_ok=false;
+                if (descContains('展开查看全文').findOnce()) { click_is_ok=descContains('展开查看全文').findOnce().click();}
+                if (textContains('展开查看全文').findOnce()) { click_is_ok=textContains('展开查看全文').findOnce().click();}
                 if (click_is_ok) {
                     console.log('已点击**展开查看全文')
                 } else {
@@ -131,8 +132,15 @@ function lookat_news() {
 
         // 判断文章读完了
         // desc = 本文及配图均为趣头条自媒体用户上传，不代表平台观点。
-        desc('本文及配图均为趣头条自媒体用户上传，不代表平台观点。').boundsInside(0, 0, WIDTH, HEIGHT / 3 * 2).findOnce();
-        if (desc('本文及配图均为趣头条自媒体用户上传，不代表平台观点。').exists() && desc('本文及配图均为趣头条自媒体用户上传，不代表平台观点。').boundsInside(0, 0, WIDTH, HEIGHT / 3).findOnce()) {
+        if (desc('本文及配图均为趣头条自媒体用户上传，不代表平台观点。').exists() && desc('本文及配图均为趣头条自媒体用户上传，不代表平台观点。').boundsInside(0, 0, WIDTH, HEIGHT / 4 * 3).findOnce()) {
+            console.log('发现**本文及配图均为趣头条自媒体用户上传，不代表平台观点。**');
+            sleep(2000);
+            back();
+            console.log('从新闻页面返回主页')
+            sleep(2000);
+            return;
+        }
+        if (text('本文及配图均为趣头条自媒体用户上传，不代表平台观点。').exists() && text('本文及配图均为趣头条自媒体用户上传，不代表平台观点。').boundsInside(0, 0, WIDTH, HEIGHT / 4 * 3).findOnce()) {
             console.log('发现**本文及配图均为趣头条自媒体用户上传，不代表平台观点。**');
             sleep(2000);
             back();
@@ -175,7 +183,7 @@ function watch_video() {
             sleep(500);
             return true;
         } else {
-            console.log('视频播放中')
+            console.log('视频播放中...')
         }
         sleep(1000);
         timestamp_end = new Date().getTime();
