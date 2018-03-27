@@ -188,8 +188,10 @@ function watch_video() {
         sleep(1000);
         timestamp_end = new Date().getTime();
         if (timestamp_end - timestamp_start > VIDEO_LENGTH) {
-            console.log("等待视频超过3分钟,停止脚本");
-            exit();
+            console.log("等待视频超过3分钟,返回主页");
+            back();
+            console.log('从视频页面返回主页,本次视频时长超过3分钟.')
+            return true;
         }
 
 
