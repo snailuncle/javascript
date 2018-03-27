@@ -228,7 +228,7 @@ function rnd_swipe() {
     duration = rnd;
     swipe(x1, y1, x2, y2, duration);
     console.log('已经滑动');
-    sleep(1000);
+    sleep(3000);
 }
 //判断是不是在主页,所有的操作都以主页为起点,
 //主页当前活动com.jifen.qukan.view.activity.MainActivity
@@ -284,9 +284,9 @@ function refresh() {
 }
 
 function advertisement() {
-    let y1, y2
-    y1 = round(WIDTH / 3);
-    y2 = round(WIDTH / 4) * 3;
+    let y1, y2;
+    y1 = round(HEIGHT / 3);
+    y2 = round(HEIGHT / 4) * 3;
 
     while (text('推广').exists() && text('推广').boundsInside(0, y1, WIDTH, y2).findOnce() || text('广告').exists() && text('广告').boundsInside(0, y1, WIDTH, y2).findOnce() || text('　点击下载 >　').exists() && text('　点击下载 >　').boundsInside(0, y1, WIDTH, y2).findOnce()) {
 
@@ -306,16 +306,8 @@ function main() {
         if (has_popup()) {
             view_popup();
         }
-
-        advertisement();
-        if (text('推广').exists()) {
-            console.log('广告');
-            rnd_swipe();
-        } else {
-            console.log('这一页没有推广广告');
-        }
         rnd_swipe();
-
+        advertisement();
         //点击新闻或者视频
         rnd_click();
         click_count++;
